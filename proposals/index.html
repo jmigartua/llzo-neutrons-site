@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The proposal set – llzo-neutrons · where the lithium sits</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-html-afe927e19676d0e50b1726048be49fb1.min.css" rel="stylesheet" append-hash="true" data-mode="light">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<!-- KaTeX auto-render: publication titles carry TeX inside generated HTML that
+     Quarto's own math pipeline never sees (same approach as thermomat). -->
+<script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script>
+/* The header ribbon is sticky; the side columns and anchor targets need its height. */
+(function () {
+  function headH() {
+    var t = document.querySelector(".topline"), h = document.querySelector(".site-head");
+    var px = (t ? t.offsetHeight : 0) + (h ? h.offsetHeight : 0);
+    if (px) document.documentElement.style.setProperty("--head-h", px + "px");
+  }
+  document.addEventListener("DOMContentLoaded", headH);
+  window.addEventListener("load", headH);
+  window.addEventListener("resize", headH);
+})();
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "$$", right: "$$", display: true }, { left: "$", right: "$", display: false }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+  /* Quarto's KaTeX pipeline writes <span class="math inline">TeX</span> without delimiters and renders
+     them in a loop that reads firstChild.data; that loop dies at the first span the auto-render above
+     has already turned into KaTeX markup, leaving every later formula raw. Render the rest here. */
+  if (window.katex) {
+    document.querySelectorAll(".math").forEach(function (el) {
+      if (!el.querySelector(".katex")) {
+        var t = el.textContent.replace(/^\s*\\[\(\[]/, "").replace(/\\[\)\]]\s*$/, "");
+        try { katex.render(t, el, { displayMode: el.classList.contains("display"), throwOnError: false }); } catch (e) {}
+      }
+      /* Quarto's loop would still visit this span and wipe it (firstChild is now an element, not text):
+         take it out of its sight. No stylesheet of the site depends on the class; KaTeX's own output carries the layout. */
+      el.classList.remove("math"); el.classList.add("math-done");
+    });
+  }
+});
+</script>
+
+
+<link rel="stylesheet" href="../assets/styles/theme.css">
+<link rel="stylesheet" href="../assets/styles/site.css">
+<link rel="stylesheet" href="../assets/styles/project.css">
+</head>
+
+<body>
+
+<!-- The header of the edition for Abdessamad Faik (tools/sibling.py copies it over the project site's). -->
+<div class="topline"></div>
+<header class="site-head">
+  <div class="site-head__inner">
+    <a href="../index.html" class="wordmark">llzo <span class="accent">neutrons</span> · where the lithium sits
+      <span class="wordmark-sub">from Zakaria Kharbouch's thesis to neutron and synchrotron beam time · Abdessamad Faik (UM6P), Irene Urcelay-Olabarria and Josu M. Igartua (EHU) · November 2026</span>
+    </a>
+    <nav class="site-nav">
+      <a href="../index.html">Overview</a>
+      <a href="../thesis/index.html">Thesis</a>
+      <a href="../gaps/index.html">Gaps</a>
+      <a href="../contrast/index.html">Contrast</a>
+      <a href="../proposals/index.html">Proposals</a>
+      <a href="../instruments/index.html">Instruments</a>
+      <a href="../app/index.html">App</a>
+      <a href="../sources/index.html">Sources</a>
+    </nav>
+  </div>
+</header>
+<!-- generated by tools/sibling.py abdo: the left navigation -->
+<div class="docs">
+<nav class="docs-nav" aria-label="Site sections">
+<button class="docs-fold" type="button" data-fold="nav" aria-label="Hide the navigation" title="Hide the navigation">‹</button>
+<details class="group" open=""><summary class="t">Overview</summary><ul><li><a href="../index.html">Overview</a></li></ul></details>
+<details class="group" open=""><summary class="t">Thesis</summary><ul><li><a href="../thesis/index.html">What the thesis did</a></li><li><a href="../thesis/crystallography/index.html">The crystallography, in detail</a></li><li><a href="../thesis/facts/index.html">The fact base: 38 compositions</a></li></ul></details>
+<details class="group" open=""><summary class="t">Gaps</summary><ul><li><a href="../gaps/index.html">The open questions G01–G11</a></li></ul></details>
+<details class="group" open=""><summary class="t">Contrast</summary><ul><li><a href="../contrast/index.html">What each probe sees, computed</a></li></ul></details>
+<details class="group" open=""><summary class="t">Proposals</summary><ul><li><a href="../proposals/index.html">The proposal set P0–P5</a></li><li><a href="../proposals/samples/index.html">Samples and preparation</a></li><li><a href="../proposals/calendar/index.html">Calendar 2027</a></li></ul></details>
+<details class="group" open=""><summary class="t">Instruments</summary><ul><li><a href="../instruments/index.html">ILL and ESRF instruments</a></li></ul></details>
+<details class="group" open=""><summary class="t">App</summary><ul><li><a href="../app/index.html">diff-ref-struct in the project</a></li></ul></details>
+<details class="group" open=""><summary class="t">Sources</summary><ul><li><a href="../sources/index.html">Sources, each with its status</a></li></ul></details>
+</nav>
+<div class="docs-main">
+
+<header id="title-block-header">
+<h1 class="title">The proposal set</h1>
+
+</header>
+
+
+<div class="page-article">
+<h1>The proposal set, P0–P5</h1>
+<p class="lede">The gaps grouped by the probe that answers them. P0 is the work at home that makes the proposals credible; P1–P4 are the first round (ILL by 15 February 2027, ESRF by 1 March 2027); P5 waits for their results. Each proposal states its samples, its request, what it measures, what it expects to find and why it needs that instrument. Times are estimates, to be checked with each instrument's local contact before submission.</p>
+<div class="table-wrap">
+<table class="prop-index caption-top">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Proposal</th>
+<th data-quarto-table-cell-role="th">Instrument</th>
+<th data-quarto-table-cell-role="th">Request</th>
+<th data-quarto-table-cell-role="th">Gaps</th>
+<th data-quarto-table-cell-role="th">Deadline</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#P0"><span class="pid">P0</span></a></td>
+<td>At home, before beam time: samples that can answer</td>
+<td>ICP-OES</td>
+<td>—</td>
+<td>G02 G03 G08 G09</td>
+<td>Before mid-February 2027</td>
+</tr>
+<tr class="even">
+<td><a href="#P1"><span class="pid">P1</span></a></td>
+<td>Where the lithium sits: high-resolution neutron diffraction of the key set</td>
+<td>D2B</td>
+<td><span class="math inline">\(\approx 8\)</span> shifts (2.7 days)</td>
+<td>G01 G02 G03 G05 G06 G08</td>
+<td>15 February 2027 (ILL standard round)</td>
+</tr>
+<tr class="odd">
+<td><a href="#P2"><span class="pid">P2</span></a></td>
+<td>All 38, powders and pellets: high-resolution synchrotron diffraction</td>
+<td>ID22</td>
+<td><span class="math inline">\(\approx 6\)</span> shifts</td>
+<td>G04 G05 G06 G07 G09</td>
+<td>1 March 2027 (ESRF standard round)</td>
+</tr>
+<tr class="even">
+<td><a href="#P3"><span class="pid">P3</span></a></td>
+<td>Temperature and the whole matrix: neutron thermodiffraction</td>
+<td>D20</td>
+<td><span class="math inline">\(\approx 6\)</span> shifts</td>
+<td>G02 G05 G09 G10</td>
+<td>15 February 2027 (ILL); spring CRG calls (D1B, XtremeD)</td>
+</tr>
+<tr class="odd">
+<td><a href="#P4"><span class="pid">P4</span></a></td>
+<td>Where Y, Rb, Ga and Sc sit locally: X-ray absorption spectroscopy</td>
+<td>BM23</td>
+<td><span class="math inline">\(\approx 9\)</span> shifts</td>
+<td>G04 G06 G07</td>
+<td>1 March 2027 (ESRF); March call (BM25)</td>
+</tr>
+<tr class="even">
+<td><a href="#P5"><span class="pid">P5</span></a></td>
+<td>Second round: local order, and the synthesis watched in situ</td>
+<td>ID15A</td>
+<td><span class="math inline">\(\approx 3\)</span> shifts ID15A, <span class="math inline">\(\approx 2\)</span> days D4c. Estimate.</td>
+<td>G09 G11</td>
+<td>September 2027 rounds</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="new" class="anchored">What is known, and what would be new</h2>
+<p>The average structure of Ga-LLZO has been measured with neutrons: Ga on 12a of <span class="math inline">\(I\bar{4}3d\)</span> (Wagner et al. 2016, SPODI; Rettenwander et al. 2016, ILL D20), Ga–Ta LLZO made with the thesis's own 15 % lithium excess (Christopher et al. 2023, ECHIDNA), Ta–Ba–Ga LLZO (Meesala et al. 2019). A proposal that offered "the first neutron study of Ga-LLZO" would not survive the panel. What no one has done, and the thesis's samples allow:</p>
+<ul>
+<li><strong>Scandium on the zirconium site refined from neutron data</strong>: the Ga–Sc garnets have been made and measured (Buannic et al. 2017), never with neutrons, although Sc has the strongest contrast of the cell.</li>
+<li><strong>A direct assignment of the yttrium site</strong> in a garnet electrolyte, by EXAFS and resonant diffraction: so far argued from lattice parameters only (Hitz et al. 2013, and the thesis).</li>
+<li><strong>Rubidium on the lanthanum site up to 0.30</strong>, six times the published level (Wu et al. 2017), and whether it survives sintering.</li>
+<li><strong>A systematic matrix at fixed processing</strong>: three La-site substituents of charge 1, 2 and 3 against two Zr-site co-dopants of charge 5 and 3, on one Ga backbone, so that the effect of each on the lithium sublattice and on the <span class="math inline">\(Ia\bar{3}d\)</span>/<span class="math inline">\(I\bar{4}3d\)</span> choice is separated.</li>
+<li><strong>The contested space group at 0.2 Ga</strong>: <span class="math inline">\(I\bar{4}3d\)</span> by neutrons and single crystals, <span class="math inline">\(Ia\bar{3}d\)</span> by synchrotron and NMR at the thesis's exact composition (Vema et al. 2023), with protonation as another cause of acentricity (Orera et al. 2016). Fresh, dry samples with joint X-ray and neutron data can settle it.</li>
+<li><strong>The balance of every element</strong>: how much of the nominal Ga is in the garnet rather than in <span class="math inline">\(\mathrm{LiGaO_{2}}\)</span>, how much Al came from the boats, where the Zr of the <span class="math inline">\(\mathrm{Li_{2}ZrO_{3}}\)</span> came from.</li>
+</ul>
+<p>The application is the one the thesis aims at: solid electrolytes for lithium-metal all-solid-state batteries. The structural results become design rules (how much lithium each substituent really adds, where it goes, what stabilises the cubic phase) and the structure-aware descriptors that the thesis's machine-learning chapter asks for.</p>
+
+<h2 id="sets" class="anchored">The sample sets</h2>
+<article class="idea" id="K12"><div class="idea-head"><span class="pid">K12</span></div><h3 class="anchored">The key set: twelve compositions that carry the thesis's questions</h3><ul><li>Ga–Ta reference (x = 0) and Ga–Sc reference: the two baselines.</li><li>Ga–Y–Ta at x = 0.10, 0.20, 0.30: the best conductor of the thesis (x = 0.20) between its neighbours; the Y-on-Zr question.</li><li>Ga–Ba–Ta at x = 0.10 and 0.20: below and above the Ba solubility limit.</li><li>Ga–Rb–Ta at x = 0.05 and 0.20: high and low tetragonal fraction, the Li-rich end.</li><li>Ga–Rb–Sc at x = 0.03 and 0.20: the best conductor of the Sc family and its decline.</li><li>Ga–Y–Sc at x = 0.10: Y in the other family, read by the thesis as on the La site.</li></ul><div class="idea-f"><span class="lbl">Why these</span><p>Each pair or triple isolates one structural question (G01–G09) at fixed processing; together they cover both families, the three substituents and both best compositions.</p></div></article>
+<article class="idea" id="A38"><div class="idea-head"><span class="pid">A38</span></div><h3 class="anchored">The whole matrix: all 38 compositions</h3><ul><li>19 Ga–M–Ta and 19 Ga–M–Sc compositions, x = 0, 0.03, 0.05, 0.10, 0.15, 0.20, 0.30 for M = Ba, Rb, Y.</li></ul><div class="idea-f"><span class="lbl">Why these</span><p>One protocol, one instrument for the trends of the thesis; the ML chapter's training set measured with structure.</p></div></article>
+<h2 id="proposals" class="anchored">The proposals</h2>
+<article class="prop" id="P0"><div class="idea-head"><span class="pid">P0</span><span class="whose">UM6P (LIMSET) and EHU</span><span class="idea-strand">answers <a href="../gaps/index.html#G02">G02</a> <a href="../gaps/index.html#G03">G03</a> <a href="../gaps/index.html#G08">G08</a> <a href="../gaps/index.html#G09">G09</a></span></div><h3 class="anchored">At home, before beam time: samples that can answer</h3><div class="idea-f"><span class="lbl">Instrument</span><p>ICP-OES; TGA–MS; laboratory XRD with an internal standard; glove box; EIS to higher frequency or lower temperature</p></div><div class="idea-f"><span class="lbl">Route</span><p>No proposal: the groups' own means, from November 2026</p></div><div class="idea-f"><span class="lbl">Samples</span><p>K12 re-synthesised fresh by the thesis's M-SSR route, as powders (<span class="math inline">\(\ge 3\)</span> g each) and sintered pellets; the stored powders of the thesis kept for comparison.</p></div><div class="idea-f"><span class="lbl">Request</span><p>—</p></div><div class="idea-f"><span class="lbl">What is measured and how</span><ul><li>Li, Ga, Al, La, Zr and M by ICP-OES on powders and pellets: the constraint every Li occupancy is refined under.</li><li>TGA–MS (<span class="math inline">\(\mathrm{H_{2}O}\)</span>, <span class="math inline">\(\mathrm{CO_{2}}\)</span>) on the same powders: protonation and carbonate.</li><li>Laboratory XRD with Si (NIST 640) as internal standard: lattice parameters with esd and zero shift stated, before and after storage.</li><li>Storage under argon from synthesis to beam; a deliberately aged twin of Ga–Ta and Ga–Y₀.₂₀–Ta.</li><li>The decision on ⁷Li: natural Li for the matrix; ⁷<span class="math inline">\(\mathrm{Li_{2}CO_{3}}\)</span> for two or three compositions if the D2B data ask for it.</li></ul></div><div class="idea-f"><span class="lbl">Expected results</span><p>Samples whose composition is known and whose history is recorded; the preliminary data every proposal needs.</p></div><div class="idea-f"><span class="lbl">Why this instrument</span><p>Panels fund questions, not samples. The ICP and TGA numbers turn "we want to see the Li" into "the nominal Li is 6.5, ICP gives x, neutrons will say where it is".</p></div><div class="idea-f"><span class="lbl">Risk and its answer</span><p>Re-synthesis may not reproduce the thesis's phase fractions exactly; that is itself a result (reproducibility), and the stored powders measured beside the fresh ones say how much.</p></div><div class="idea-f"><span class="lbl">Deadline</span><p>Before mid-February 2027</p></div></article>
+<article class="prop" id="P1"><div class="idea-head"><span class="pid">P1</span><span class="whose">ILL, Grenoble</span><span class="idea-strand">answers <a href="../gaps/index.html#G01">G01</a> <a href="../gaps/index.html#G02">G02</a> <a href="../gaps/index.html#G03">G03</a> <a href="../gaps/index.html#G05">G05</a> <a href="../gaps/index.html#G06">G06</a> <a href="../gaps/index.html#G08">G08</a></span></div><h3 class="anchored">Where the lithium sits: high-resolution neutron diffraction of the key set</h3><div class="idea-f"><span class="lbl">Instrument</span><p>D2B (λ = 1.594 Å, Δd/d <span class="math inline">\(\approx\)</span> <span class="math inline">\(5\times10^{-4}\)</span>, 2<span class="math inline">\(\theta\)</span> to 160°); alternative D20 in its high-resolution Ge configuration</p></div><div class="idea-f"><span class="lbl">Route</span><p>ILL standard proposal, College 5 (materials), with UPV/EHU proposers ensuring the two-thirds member-country rule; cross-referenced to P2</p></div><div class="idea-f"><span class="lbl">Samples</span><p>K12 (fresh, from P0), 2–3 g each, natural Li, in 8 mm vanadium cans; two sintered pellets crushed (Ga–Y₀.₂₀–Ta, Ga–Rb₀.₀₃–Sc).</p></div><div class="idea-f"><span class="lbl">Request</span><p><span class="math inline">\(\approx 8\)</span> shifts (2.7 days): about 4 h per sample for 14 samples, plus empty can, vanadium and Si standard. Estimate.</p></div><div class="idea-f"><span class="lbl">What is measured and how</span><ul><li>Full patterns to <span class="math inline">\(d \approx 0.81\)</span> Å at room temperature.</li><li>Joint Rietveld refinement with the ID22 pattern of the same powder (P2) in diff-ref-struct: lattice and profile from X-rays, Li/Ga/Al occupancies, O1/O2 coordinates and displacement parameters from neutrons.</li><li>Constraints: ICP composition (P0), charge balance, site capacities.</li></ul></div><div class="idea-f"><span class="lbl">Expected results</span><p>For each composition: Li over 12a, 12b and 48e with esd (the measured vacancy concentration); Ga on 12a; Al or its upper bound; the acentric O distortion; Ba on the La site for the Ba series; H from the background. The vacancy argument of the thesis tested against measured Li contents.</p></div><div class="idea-f"><span class="lbl">Why this instrument</span><p>Lithium and oxygen carry 57 % of the neutron scattering power of the garnet against 6 % in X-rays; every Li question is 2–4 times more visible (Contrast page). D2B's resolution separates the cubic and tetragonal garnets and <span class="math inline">\(\mathrm{Li_{2}ZrO_{3}}\)</span>.</p></div><div class="idea-f"><span class="lbl">Risk and its answer</span><p>Absorption of natural Li (<span class="math inline">\(\mu \approx 1.5\)</span> <span class="math inline">\(\mathrm{cm}^{-1}\)</span>, <span class="math inline">\(\mu R \approx 0.37\)</span> in an 8 mm can): correctable, but ⁷Li (μ <span class="math inline">\(\approx 0.12\)</span> <span class="math inline">\(\mathrm{cm}^{-1}\)</span>) would remove it for the two compositions where the Li occupancy matters most.</p></div><div class="idea-f"><span class="lbl">Deadline</span><p>15 February 2027 (ILL standard round)</p></div></article>
+<article class="prop" id="P2"><div class="idea-head"><span class="pid">P2</span><span class="whose">ESRF, Grenoble</span><span class="idea-strand">answers <a href="../gaps/index.html#G04">G04</a> <a href="../gaps/index.html#G05">G05</a> <a href="../gaps/index.html#G06">G06</a> <a href="../gaps/index.html#G07">G07</a> <a href="../gaps/index.html#G09">G09</a></span></div><h3 class="anchored">All 38, powders and pellets: high-resolution synchrotron diffraction</h3><div class="idea-f"><span class="lbl">Instrument</span><p>ID22 (31–35 keV, 13-channel analyser, FWHM <span class="math inline">\(\approx 0.0025\)</span>°, robot for 75 capillaries); alternative BM25 SpLine through the Spanish CRG route</p></div><div class="idea-f"><span class="lbl">Route</span><p>ESRF standard proposal, UPV/EHU as main proposer; or a BAG with UPV/EHU as PI and at least three groups</p></div><div class="idea-f"><span class="lbl">Samples</span><p>A38 calcined powders and K12 crushed pellets, 0.5 mm capillaries, with an internal standard for the amorphous fraction; <span class="math inline">\(\mathrm{LaB_{6}}\)</span> / Si for calibration.</p></div><div class="idea-f"><span class="lbl">Request</span><p><span class="math inline">\(\approx 6\)</span> shifts: 50 patterns of a few tens of minutes with the robot, plus resonant data at the Y K edge (17.04 keV) for 3 compositions at 3 energies. Estimate.</p></div><div class="idea-f"><span class="lbl">What is measured and how</span><ul><li>Lattice parameters with esd for all 38 under one protocol (the two chapters on one footing).</li><li>Phase fractions (c-LLZO, t-LLZO, <span class="math inline">\(\mathrm{Li_{2}ZrO_{3}}\)</span>, <span class="math inline">\(\mathrm{BaZrO_{3}}\)</span>, <span class="math inline">\(\mathrm{Sc_{2}O_{3}}\)</span>, <span class="math inline">\(\mathrm{Y_{2}O_{3}}\)</span>, <span class="math inline">\(\mathrm{La_{2}Zr_{2}O_{7}}\)</span>) with detection limits <span class="math inline">\(\approx 0.1\)</span> wt%, for powders and pellets.</li><li>La-site occupancy (Y, Rb on La) under the ICP constraint; weak <span class="math inline">\(I\bar{4}3d\)</span> reflections; peak shapes (strain, compositional spread).</li><li>Resonant diffraction below and at the Y K edge: the Y contrast changed on purpose, site by site.</li></ul></div><div class="idea-f"><span class="lbl">Expected results</span><p>The structural table of the thesis remade with esd; a closed mass balance for each composition; the powder-to-pellet change of the phase state; the fraction of Y missing from the La site.</p></div><div class="idea-f"><span class="lbl">Why this instrument</span><p>Resolution and statistics no laboratory instrument reaches; the X-ray contrast is the right one for Y, Rb, Ta and Sc on their sites (Contrast page).</p></div><div class="idea-f"><span class="lbl">Risk and its answer</span><p>Rb, Ba and La absorb at 31–35 keV in 0.5 mm capillaries; diluted or thinner capillaries, or 60 keV, if needed.</p></div><div class="idea-f"><span class="lbl">Deadline</span><p>1 March 2027 (ESRF standard round)</p></div></article>
+<article class="prop" id="P3"><div class="idea-head"><span class="pid">P3</span><span class="whose">ILL, Grenoble</span><span class="idea-strand">answers <a href="../gaps/index.html#G02">G02</a> <a href="../gaps/index.html#G05">G05</a> <a href="../gaps/index.html#G09">G09</a> <a href="../gaps/index.html#G10">G10</a></span></div><h3 class="anchored">Temperature and the whole matrix: neutron thermodiffraction</h3><div class="idea-f"><span class="lbl">Instrument</span><p>D20 (1.30 Å, <span class="math inline">\(\approx\)</span> <span class="math inline">\(10^{8}\)</span> n <span class="math inline">\(\mathrm{cm}^{-2}\)</span> <span class="math inline">\(\mathrm{s}^{-1}\)</span>; furnace to 1100 °C); alternatives through the Spanish CRG routes: D1B (CNRS–CSIC) and XtremeD (INMA–CSIC), both with furnaces to 1200 K</p></div><div class="idea-f"><span class="lbl">Route</span><p>ILL standard proposal; or the D1B / XtremeD CRG calls (Spanish share)</p></div><div class="idea-f"><span class="lbl">Samples</span><p>A38 at room temperature (the compositions not in P1 for Li trends across the matrix); four compositions heated to 1000 K: Ga–Ta, Ga–Y₀.₂₀–Ta, Ga–Rb₀.₀₃–Sc, Ga–Rb₀.₂₀–Ta (tetragonal–cubic transition).</p></div><div class="idea-f"><span class="lbl">Request</span><p><span class="math inline">\(\approx 6\)</span> shifts: about 15 min per room-temperature pattern, 6–8 h per heating ramp. Estimate.</p></div><div class="idea-f"><span class="lbl">What is measured and how</span><ul><li>Room temperature: Li content and tetragonal fraction across the 38, at lower resolution than D2B but with the same contrast.</li><li>Ramps to 1000 K: lattice expansion, the tetragonal–cubic transition, Li loss in situ, high-temperature datasets for nuclear density maps of the Li pathways.</li></ul></div><div class="idea-f"><span class="lbl">Expected results</span><p>The Li-content trend of every series; the tetragonal–cubic transition temperature against the measured Li content; Li density maps at 300, 600 and 900 K for the four compositions.</p></div><div class="idea-f"><span class="lbl">Why this instrument</span><p>D20's flux makes the whole matrix and the ramps possible in days. The Spanish CRG instruments give a second route if the ILL round is tight.</p></div><div class="idea-f"><span class="lbl">Risk and its answer</span><p>Li volatilisation above 900 °C in the furnace: closed Nb or Pt containers, and the ramp stopped below the sintering temperature.</p></div><div class="idea-f"><span class="lbl">Deadline</span><p>15 February 2027 (ILL); spring CRG calls (D1B, XtremeD)</p></div></article>
+<article class="prop" id="P4"><div class="idea-head"><span class="pid">P4</span><span class="whose">ESRF, Grenoble</span><span class="idea-strand">answers <a href="../gaps/index.html#G04">G04</a> <a href="../gaps/index.html#G06">G06</a> <a href="../gaps/index.html#G07">G07</a></span></div><h3 class="anchored">Where Y, Rb, Ga and Sc sit locally: X-ray absorption spectroscopy</h3><div class="idea-f"><span class="lbl">Instrument</span><p>BM23 (4.5–90 keV, multi-sample holders); BM08 LISA or BM20 for the Sc K edge (4.49 keV); BM25 SpLine (Spanish route) for edges above 5 keV</p></div><div class="idea-f"><span class="lbl">Route</span><p>ESRF standard proposal; BM25 through the Spanish CRG committee (March and September calls)</p></div><div class="idea-f"><span class="lbl">Samples</span><p>Ga–Y–Ta (x = 0.05, 0.10, 0.20, 0.30), Ga–Y–Sc (0.05, 0.20), Ga–Rb–Ta (0.20), Ga–Rb–Sc (0.03, 0.20), the two references; references <span class="math inline">\(\mathrm{Y_{2}O_{3}}\)</span>, YSZ, <span class="math inline">\(\mathrm{Y_{3}Al_{5}O_{12}}\)</span>, <span class="math inline">\(\mathrm{RbNO_{3}}\)</span> or <span class="math inline">\(\mathrm{Rb_{2}CO_{3}}\)</span>, <span class="math inline">\(\mathrm{Ga_{2}O_{3}}\)</span>, <span class="math inline">\(\mathrm{LiGaO_{2}}\)</span>, <span class="math inline">\(\mathrm{Sc_{2}O_{3}}\)</span>. Pellets diluted in cellulose or BN, transmission.</p></div><div class="idea-f"><span class="lbl">Request</span><p><span class="math inline">\(\approx 9\)</span> shifts: Y K (17.04 keV) about 10 samples, Rb K (15.20 keV) 4, Ga K (10.37 keV) 6, Zr K (18.0 keV) 4, with references. Sc K separately on BM08 or BM20. Estimate.</p></div><div class="idea-f"><span class="lbl">What is measured and how</span><ul><li>Y K EXAFS: Y–O coordination number and distance, Y–cation shells: 6-coordinated Zr site against 8-coordinated La site.</li><li>Rb K: the Rb environment in the garnet against Rb-rich second phases.</li><li>Ga K: tetrahedral Ga, Ga–O distance, the local picture behind the 12a occupancy of P1.</li><li>Zr K: the octahedral site as seen from Zr, for the Y and Sc series.</li></ul></div><div class="idea-f"><span class="lbl">Expected results</span><p>The Y site fractions of G04 measured locally; Rb and Ga environments confirmed; the Sc site.</p></div><div class="idea-f"><span class="lbl">Why this instrument</span><p>Only a local, element-specific probe can tell Y on the Zr site from Y on the La site; neither diffraction probe can (Contrast page, cases y-zr and y-la).</p></div><div class="idea-f"><span class="lbl">Risk and its answer</span><p>Ba L3 is cut by the La L3 edge 236 eV above it and Ta L3 by Ga K: Ba and Ta only by K-edge (37.4 and 67.4 keV) if needed, or not at all in the first round.</p></div><div class="idea-f"><span class="lbl">Deadline</span><p>1 March 2027 (ESRF); March call (BM25)</p></div></article>
+<article class="prop" id="P5"><div class="idea-head"><span class="pid">P5</span><span class="whose">ESRF and ILL</span><span class="idea-strand">answers <a href="../gaps/index.html#G09">G09</a> <a href="../gaps/index.html#G11">G11</a></span></div><h3 class="anchored">Second round: local order, and the synthesis watched in situ</h3><div class="idea-f"><span class="lbl">Instrument</span><p>ID15A (X-ray PDF; oven to 1200 K), ILL D4c (neutron PDF); BM31 (XAS + XRD + PDF in situ) or ID15A for the synthesis</p></div><div class="idea-f"><span class="lbl">Route</span><p>After P1–P4 results; September 2027 rounds</p></div><div class="idea-f"><span class="lbl">Samples</span><p>Ga–Ta, Ga–Y₀.₂₀–Ta, Ga–Rb₀.₀₃–Sc for PDF; the precursor mixture of Ga–Y₀.₂₀–Ta for the synthesis in situ (<span class="math inline">\(450 \to 900\)</span> °C).</p></div><div class="idea-f"><span class="lbl">Request</span><p><span class="math inline">\(\approx 3\)</span> shifts ID15A, <span class="math inline">\(\approx 2\)</span> days D4c. Estimate.</p></div><div class="idea-f"><span class="lbl">What is measured and how</span><ul><li>X-ray and neutron PDF: local distortions around Y, Rb, Ga; Li–O and Li–Li correlations.</li><li>In situ synthesis: the order in which <span class="math inline">\(\mathrm{La_{2}Zr_{2}O_{7}}\)</span>, <span class="math inline">\(\mathrm{Li_{2}ZrO_{3}}\)</span>, t- and c-LLZO form along the thesis's M-SSR route, and where lithium is lost.</li></ul></div><div class="idea-f"><span class="lbl">Expected results</span><p>The local structure behind the average one; the step of the synthesis where the <span class="math inline">\(\mathrm{Li_{2}ZrO_{3}}\)</span> of G09 forms.</p></div><div class="idea-f"><span class="lbl">Why this instrument</span><p>It answers what P1–P4 leave open, and connects the thesis's synthesis chapter (Chapter II) to the structures.</p></div><div class="idea-f"><span class="lbl">Risk and its answer</span><p>Only worth asking once P1–P2 have shown which compositions carry the effects.</p></div><div class="idea-f"><span class="lbl">Deadline</span><p>September 2027 rounds</p></div></article>
+<h2 id="second" class="anchored">A second strand, for discussion</h2>
+<p class="">Fadila El Kouihen's thesis on nickel-rich layered cathodes (UM6P, same supervisors) carries the textbook neutron question of those materials, Li/Ni antisite mixing (b(Ni) = 10.3 fm against b(Li) = −1.90 fm), and the same synchrotron needs. If the garnet strand is agreed, it can be studied the same way and joined to it, which would make a stronger case for a long-term proposal.</p>
+
+
+</div>
+
+
+<!-- Closes the reading column opened by _gen/docs-nav.html, adds the right
+     "On this page" list, and wires: current-page marking in the left nav,
+     breadcrumbs, the page TOC (from h2/h3 in the reading column) and a
+     scroll-spy. Pure DOM, no library. -->
+  </div>
+  <aside class="docs-toc"><button class="docs-fold" type="button" data-fold="toc" aria-label="Hide the page outline" title="Hide the page outline">›</button><div class="t">On this page</div><ol></ol></aside>
+</div>
+<script>
+(function () {
+  /* 0. The two side panels fold on their chevrons; the choice is remembered in this browser. */
+  var docs = document.querySelector('.docs');
+  if (docs) {
+    var store = {};
+    try { store = JSON.parse(localStorage.getItem('docs-fold') || '{}'); } catch (e) { store = {}; }
+    function apply() {
+      docs.classList.toggle('nav-folded', !!store.nav);
+      docs.classList.toggle('toc-folded', !!store.toc);
+      document.querySelectorAll('.docs-fold').forEach(function (b) {
+        var which = b.getAttribute('data-fold'), folded = !!store[which];
+        b.innerHTML = (which === 'nav') === folded ? '&rsaquo;' : '&lsaquo;';
+        var what = which === 'nav' ? 'the navigation' : 'the page outline';
+        b.title = (folded ? 'Show ' : 'Hide ') + what; b.setAttribute('aria-label', b.title);
+      });
+    }
+    document.querySelectorAll('.docs-fold').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var which = b.getAttribute('data-fold'); store[which] = !store[which];
+        try { localStorage.setItem('docs-fold', JSON.stringify(store)); } catch (e) {}
+        apply();
+      });
+    });
+    apply();
+  }
+  /* 0b. The header ribbon: mark the entry whose section holds this page. Quarto rewrites the hrefs to
+     relative paths, so folders are read from the resolved URLs; the Overview link gives the site root. */
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.site-nav a'));
+    if (!links.length) return;
+    /* a served URL may end in '/' (GitHub Pages: …/about/); read it as …/about/index.html */
+    function folder(path) { if (/\/$/.test(path)) path += 'index.html'; var s = path.split('/').filter(Boolean); return s.length > 1 ? s[s.length - 2] : ''; }
+    var wm = document.querySelector('a.wordmark');            // the wordmark links to the site root
+    var root = folder((wm || links[0]).pathname);
+    var map = { rietveld: 'cases', drude: 'cases', dielectric: 'cases' };
+    function key(path) { var f = folder(path); if (f === root) return 'overview'; return map[f] || f; }
+    var here = key(location.pathname);
+    links.forEach(function (a) { a.classList.toggle('current', key(a.pathname) === here); });
+  })();
+
+  var main = document.querySelector('.docs-main');
+  var nav = document.querySelector('.docs-nav');
+  var toc = document.querySelector('.docs-toc ol');
+  if (!main || !nav || !toc) return;
+
+  /* 1. Left nav: mark the current page (and section, if the hash matches). */
+  var here = location.pathname.replace(/\/index\.html$/, '/');
+  var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+  var pageLink = null, hashLink = null;
+  links.forEach(function (a) {
+    var p = a.pathname.replace(/\/index\.html$/, '/');
+    if (p !== here) return;
+    if (!a.hash && !pageLink) pageLink = a;
+    if (a.hash && a.hash === location.hash) hashLink = a;
+  });
+  var cur = hashLink || pageLink;
+  if (cur) {
+    cur.classList.add('current');
+    var det = cur.closest('details.group');
+    if (det) { det.open = true; det.classList.add('has-current'); }
+    /* Breadcrumbs: group title › page (› section). */
+    var crumbs = document.createElement('div');
+    crumbs.className = 'docs-crumbs';
+    var g = det ? det.querySelector('summary.t') : null;
+    var parts = [];
+    function push(t) { if (t && parts[parts.length - 1] !== t) parts.push(t); }
+    if (g) push(g.textContent.trim());
+    if (pageLink && pageLink !== cur) push(pageLink.textContent.trim());
+    push(cur.textContent.trim());
+    crumbs.innerHTML = parts.map(function (t, i) {
+      return (i ? '<span class="sep">›</span>' : '') + '<span>' + t.replace(/</g, '&lt;') + '</span>';
+    }).join('');
+    main.insertBefore(crumbs, main.firstChild);
+  }
+
+  /* 2. Right "On this page": h2 and h3 of the reading column. */
+  var used = {};
+  var heads = Array.prototype.slice.call(main.querySelectorAll('h2, h3')).filter(function (h) {
+    if (h.closest('.site-foot, .featured-band, .msg-grid, [data-toc="no"]')) return false;
+    if (h.classList.contains('unnumbered') || h.id === 'contenido') return false;
+    return h.textContent.trim().length > 0;
+  });
+  heads.forEach(function (h) {
+    if (!h.id) {
+      var s = h.textContent.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || 'sec';
+      while (used[s] || document.getElementById(s)) s += '-';
+      h.id = s;
+    }
+    used[h.id] = true;
+    var li = document.createElement('li');
+    if (h.tagName === 'H3') li.className = 'l3';
+    var a = document.createElement('a');
+    a.href = '#' + h.id;
+    /* This runs before KaTeX has rendered the headings, so a heading with mathematics still holds TeX
+       source: copy its markup, including the math spans, and let the page's KaTeX pass render the copy. */
+    var copy = h.cloneNode(true);
+    copy.querySelectorAll('.katex-mathml, annotation, .anchorjs-link').forEach(function (n) { n.remove(); });
+    var label = copy.textContent.trim().replace(/\s+/g, ' ');
+    if (copy.querySelector('.math, .math-done, .katex')) a.innerHTML = copy.innerHTML.trim();
+    else a.textContent = label.length > 72 ? label.slice(0, 70).replace(/[\s,;:]+\S*$/, '') + '…' : label;
+    a.title = label;
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+  if (!heads.length) { document.querySelector('.docs-toc').hidden = true; return; }
+
+  /* 3. Scroll-spy. */
+  var items = Array.prototype.slice.call(toc.querySelectorAll('a'));
+  function spy() {
+    var y = window.scrollY + 120, best = null;
+    heads.forEach(function (h) { if (h.getBoundingClientRect().top + window.scrollY <= y) best = h; });
+    items.forEach(function (a) { a.classList.toggle('current', best && a.getAttribute('href') === '#' + best.id); });
+  }
+  window.addEventListener('scroll', spy, { passive: true });
+  window.addEventListener('hashchange', spy);
+  spy();
+})();
+</script>
+<footer class="site-foot">
+  <div class="site-foot__inner">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <h4 class="anchored">What this is</h4>
+        <p>A proposal for discussion: Zakaria Kharbouch's thesis on tri-doped Ga-LLZO garnet electrolytes (UM6P, 2026), re-read for its crystallography, and the neutron and synchrotron experiments that would give it its structural answers. Abdessamad Faik (UM6P), Irene Urcelay-Olabarria and Josu M. Igartua (EHU).</p>
+        <div class="cite-block">Josu M. Igartua · Fisika Saila, EHU<br>josu.igartua@ehu.eus</div>
+      </div>
+      <div><h4 class="anchored">This site</h4><ul>
+        <li><a href="../index.html">Overview</a></li><li><a href="../thesis/index.html">Thesis</a></li><li><a href="../gaps/index.html">Gaps</a></li><li><a href="../contrast/index.html">Contrast</a></li><li><a href="../proposals/index.html">Proposals</a></li><li><a href="../instruments/index.html">Instruments</a></li><li><a href="../app/index.html">App</a></li><li><a href="../sources/index.html">Sources</a></li>
+      </ul></div>
+      <div><h4 class="anchored">Facilities</h4><ul>
+        <li><a href="https://www.ill.eu/">ILL, Grenoble</a></li>
+        <li><a href="https://www.esrf.fr/">ESRF, Grenoble</a></li>
+        <li><a href="https://jmigartua.github.io/diff-ref-struct-site/">diff-ref-struct</a></li></ul></div>
+      <div><h4 class="anchored">Status</h4><ul>
+        <li>Draft for discussion, November 2026</li>
+        <li>Numbers from the thesis manuscript of 17 October 2026</li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Abdessamad Faik, Irene Urcelay-Olabarria, Josu M. Igartua · draft</span>
+      <span>Quarto · family design kit</span>
+    </div>
+  </div>
+</footer>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+    tabsets.forEach(function(tabset) {
+      const tabby = new Tabby('#' + tabset.id);
+    });
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
