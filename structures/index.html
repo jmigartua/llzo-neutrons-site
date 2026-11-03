@@ -142,6 +142,21 @@ footer{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:
 </style>
 </head>
 <body>
+<style>
+.sitebar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--surface);border-bottom:1px solid var(--rule)}
+.sitebar nav{max-width:1240px;margin:0 auto;padding:9px 20px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 20px;font-size:13.5px}
+.sitebar a{color:var(--muted);text-decoration:none}
+.sitebar a:hover,.sitebar a:focus-visible{color:var(--ink);text-decoration:underline}
+.sitebar .home{font-family:var(--cond);font-weight:600;font-size:15px;color:var(--ink);margin-right:8px}
+.sitebar .here{color:var(--ink);font-weight:600}
+</style>
+<header class="sitebar"><nav aria-label="The project site">
+<a class="home" href="../index.html">&larr; llzo-neutrons &middot; where the lithium sits</a>
+<a href="../thesis/index.html">Thesis</a><a href="../gaps/index.html">Gaps</a><a href="../contrast/index.html">Contrast</a>
+<span class="here" aria-current="page">Structures</span><a href="../proposals/index.html">Proposals</a>
+<a href="../instruments/index.html">Instruments</a><a href="../app/index.html">App</a><a href="../sources/index.html">Sources</a>
+</nav></header>
+
 
 <div class="wrap">
 
