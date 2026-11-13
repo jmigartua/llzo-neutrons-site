@@ -137,6 +137,43 @@ th{font-family:var(--cond);font-weight:600;font-size:14px}
 .bpr{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:16px}
 .bcol{display:flex;flex-direction:column;gap:10px}
 .bt td:first-child{color:var(--ink);font-weight:500;white-space:normal}
+/* reading guide of the matrix */
+.howto{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;margin-top:4px;font:500 13.5px var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--rule);border-radius:999px;padding:5px 14px 5px 6px;cursor:pointer}
+.howto .qm{width:21px;height:21px;border-radius:50%;background:var(--ink);color:var(--bg);display:inline-grid;place-items:center;font:600 12px var(--mono)}
+.howto:hover{border-color:var(--muted)}
+.howto:focus-visible,.g-x:focus-visible,.g-close:focus-visible{outline:2px solid var(--ba);outline-offset:2px}
+dialog.guide{width:min(940px,calc(100vw - 32px));max-height:calc(100dvh - 40px);overflow:auto;padding:0;border:1px solid var(--rule);border-radius:10px;background:var(--surface);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.28)}
+dialog.guide::backdrop{background:rgba(15,19,26,.55)}
+.g-in{padding:22px 24px 24px;display:flex;flex-direction:column;gap:24px}
+.g-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.g-head > div{display:flex;flex-direction:column;gap:6px}
+.g-x{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--rule);background:none;color:var(--ink);font:400 20px/1 var(--sans);cursor:pointer}
+.g-x:hover{border-color:var(--muted)}
+.g-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px 32px}
+.g-block{display:flex;flex-direction:column;gap:9px;min-width:0}
+.g-block p{font-size:14px}
+.g-block + .g-block,.g-grid + .g-block,.g-block + .g-grid,.g-grid + .g-grid{border-top:1px solid var(--soft);padding-top:20px}
+.g-grid > .g-block{border-top:0;padding-top:0}
+.anat{display:grid;grid-template-columns:180px minmax(0,1fr);gap:14px 24px;align-items:center}
+@media (max-width:600px){.anat{grid-template-columns:1fr}.anat svg{width:180px}}
+.anat figcaption{text-align:center;font-family:var(--mono);font-size:12px}
+.marks,.gp,.gm{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px}
+.marks li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:baseline}
+.marks b,.gm b{font-family:var(--cond);font-weight:600;font-size:15px}
+.mk{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--ink);display:inline-grid;place-items:center;font:600 12px var(--mono)}
+.sqs{display:flex;flex-wrap:wrap;gap:3px 10px;margin-top:6px;font-family:var(--mono);font-size:12.5px}
+.sqs span{display:inline-flex;align-items:center;gap:5px}
+.sqs i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.gp li{display:grid;grid-template-columns:76px minmax(0,1fr) minmax(0,1.1fr);gap:6px 14px;align-items:baseline;padding-bottom:9px;border-bottom:1px solid var(--soft)}
+.gp li:last-child{border-bottom:0;padding-bottom:0}
+@media (max-width:680px){.gp li{grid-template-columns:76px minmax(0,1fr)}.gp .who{grid-column:2}}
+.gp .n{font-family:var(--mono);font-weight:600}
+.gp .who{color:var(--muted);font-size:13px;display:flex;flex-direction:column;gap:2px}
+.gm li{border-left:3px solid var(--rule);padding:2px 0 2px 10px}
+.gm li.now{border-left-color:var(--ink)}
+.gm .tag{font-family:var(--mono);font-size:11.5px;border:1px solid var(--ink);border-radius:3px;padding:0 5px;margin-left:8px;vertical-align:1px}
+.g-foot{display:flex;justify-content:flex-end}
+.g-close{font:500 13.5px var(--sans);color:var(--bg);background:var(--ink);border:0;border-radius:7px;padding:8px 18px;cursor:pointer}
 footer{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--rule);padding-top:14px}
 @media (prefers-reduced-motion:no-preference){.cell rect.box{transition:stroke-width .12s}}
 </style>
@@ -197,6 +234,7 @@ footer{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:
   <div class="sec-head">
     <h2 id="h-matrix">The matrix: what is known, what each garnet will get</h2>
     <p class="lede">The 38 compositions of the thesis, each family branching from its co-doped reference into three La-site series. Colour by what the thesis determined, or by how many probes are planned. The squares under each value are the planned determinations. Select a cell for what was refined, what does not close, and what each measurement will determine for that composition.</p>
+    <button type="button" class="howto" id="howto-open" aria-haspopup="dialog" aria-controls="guide"><span class="qm" aria-hidden="true">?</span>How to read the matrix</button>
   </div>
   <div class="toolbar">
     <div class="seg" role="group" aria-label="Colour the cells by">
@@ -230,6 +268,20 @@ footer{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:
   </div>
   <p class="note">The thesis gives phase fractions and Li₂ZrO₃ only for the Ta family; Sc cells show "n/a" in those modes. Cells with a bold frame are the key set K12, re-made fresh for the high-resolution neutron work. Nominal vacancies are 7 − Li from the weighing formula, M on the La site.</p>
   <div class="panel detail" id="detail" aria-live="polite"></div>
+  <dialog class="guide" id="guide" aria-labelledby="g-title">
+    <div class="g-in">
+      <div class="g-head">
+        <div>
+          <span class="eyebrow">Reading guide · the matrix</span>
+          <h2 id="g-title">How to read the matrix</h2>
+          <p class="lede">Each box is one garnet, and it says three things at once: which probes are planned for it (the five squares), how many that is (the number, repeated by the shade), and whether it is one of the key set (the frame).</p>
+        </div>
+        <button type="button" class="g-x" id="g-x" aria-label="Close the reading guide">×</button>
+      </div>
+      <div id="g-body"></div>
+      <div class="g-foot"><button type="button" class="g-close" id="g-close">Back to the matrix</button></div>
+    </div>
+  </dialog>
 </section>
 
 <section aria-labelledby="h-q">
@@ -475,6 +527,86 @@ function renderMatrix(focusId){
   if(focusId){const svg=document.getElementById('fam-'+byId[focusId].fam);const want=[...svg.querySelectorAll('.cell')].find(c=>c.getAttribute('aria-label')===label(byId[focusId]));if(want)want.focus({preventScroll:true});}
 }
 document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;try{localStorage.setItem('kgs-mode',mode);}catch(e){}renderMatrix();}));
+
+/* reading guide of the matrix: filled from DATA when opened, so its counts follow the plan */
+const SAMPLE='Ta-Rb-0.20';
+const GPROBE=[['D20','P3','Li content and tetragonal fraction at room temperature: the trend across the whole matrix'],
+ ['ID22','P2','lattice parameter and phase fractions, every garnet on one protocol'],
+ ['D2B','P1','where the lithium sits (12a, 12b, 48e), Ga on 12a, the acentric O distortion, Al and H'],
+ ['EXAFS','P4','the neighbours of one element: Y on the La or the Zr site, Rb in the garnet, Ga and Zr'],
+ ['PDF','P5','local order around the substituents, Li–Li correlations (total scattering)']];
+const GMODE={plan:['Probes planned','the number counts the filled squares, 2 to 5.'],
+ cub:['Cubic garnet (wt%)','how much of the powder the thesis refined as cubic garnet, the phase wanted. Ta family only.'],
+ lzo:['Li₂ZrO₃ per f.u.','the secondary phase the thesis reports, per garnet formula unit. Ta family only.'],
+ vac:['Nominal vacancies','7 − Li from the weighing formula: the variable the thesis explains its results with, never measured.']};
+function names(list){
+  return ['Ta','Sc'].map(f=>{const L=list.filter(d=>d.fam===f);if(!L.length)return'';const parts=[];
+    if(L.some(d=>!d.M))parts.push('ref.');
+    ORDER.forEach(M=>{const xs=L.filter(d=>d.M===M).map(d=>d.x.toFixed(2));if(xs.length)parts.push(M+' '+xs.join(', '));});
+    return `<span>${f==='Ta'?'Ga–M–Ta':'Ga–M–Sc'}: ${parts.join(' · ')}</span>`;}).join('');
+}
+function sampleCell(d){
+  const m=MODES.plan,n=probesOf(d).size,fill=ramp(norm(m,n)),tc=textOn(fill),ps=probesOf(d);
+  const sq=16,gap=5,tot=PROBES.length*sq+(PROBES.length-1)*gap,x0=14,y0=12,w=112,h=152;let px=x0+(w-tot)/2;
+  let sqs='';PROBES.forEach(([p,c,op])=>{const has=ps.has(p);sqs+=`<rect x="${px}" y="${y0+h-30}" width="${sq}" height="${sq}" rx="3" fill="${has?c:'none'}" fill-opacity="${has?op:0}" stroke="${has?'none':tc}" stroke-opacity=".45" stroke-width="1.5"/>`;px+=sq+gap;});
+  const mark=(k,cx,cy,tx,ty)=>`<line x1="${cx-11}" y1="${cy}" x2="${tx}" y2="${ty}" stroke="var(--ink)" stroke-width="1.2"/><circle cx="${tx}" cy="${ty}" r="2.5" fill="var(--ink)"/><circle cx="${cx}" cy="${cy}" r="11" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="12" font-weight="600">${k}</text>`;
+  return `<svg viewBox="0 0 180 176" role="img" aria-label="One box of the matrix, enlarged: ${label(d)}.">
+  <rect x="${x0}" y="${y0}" width="${w}" height="${h}" rx="9" fill="${fill}" stroke="var(--ink)" stroke-width="3.2"/>
+  <text x="${x0+w/2}" y="${y0+74}" text-anchor="middle" font-size="30" font-weight="500" style="fill:${tc}">${n}</text>${sqs}
+  ${mark(1,164,22,x0+w,y0+10)}${mark(2,164,64,x0+w/2+16,y0+64)}${mark(3,164,104,x0+w-14,y0+104)}${mark(4,164,y0+h-22,x0+w-8,y0+h-22)}</svg>`;
+}
+function guide(){
+  const d=byId[SAMPLE],ps=probesOf(d);
+  const has=p=>DATA.filter(e=>probesOf(e).has(p));
+  const extra={D20:DATA.filter(e=>e.plan.some(p=>p[0]==='D20'&&/ramp/.test(p[2]))),ID22:DATA.filter(e=>e.plan.some(p=>p[0]==='ID22'&&/resonant/.test(p[2])))};
+  const k12=DATA.filter(e=>e.k12);
+  const sqLine=PROBES.map(([p,c,op])=>`<span><i style="${ps.has(p)?`background:${c};opacity:${op}`:'border:1.5px solid var(--muted)'}"></i>${p}</span>`).join('');
+  const on=PROBES.filter(([p])=>ps.has(p)).map(([p])=>p),off=PROBES.filter(([p])=>!ps.has(p)).map(([p])=>p);
+  const yR=r=>22+r*40;
+  const tree=`<svg viewBox="0 0 330 122" role="img" aria-label="One family: the reference branches into three rows, Rb, Ba and Y, each over six amounts x.">
+   <text x="116" y="10" text-anchor="end" font-size="9.5" class="mut">x =</text>${XS.map((x,i)=>`<text x="${136+i*34}" y="10" text-anchor="middle" font-size="9.5" class="mut">${x.toFixed(2)}</text>`).join('')}
+   <rect x="4" y="${yR(1)-18}" width="58" height="36" rx="4" fill="${ramp(.85)}" stroke="var(--ink)" stroke-width="1.8"/>
+   <text x="33" y="${yR(1)-3}" text-anchor="middle" font-size="9.5" style="fill:${textOn(ramp(.85))}">x = 0</text><text x="33" y="${yR(1)+11}" text-anchor="middle" font-size="10.5" font-weight="600" style="fill:${textOn(ramp(.85))}">ref.</text>
+   ${ORDER.map((M,r)=>`<path d="M62,${yR(1)} C76,${yR(1)} 74,${yR(r)} 88,${yR(r)}" fill="none" stroke="var(--muted)" stroke-width="1.2"/>
+   <text x="92" y="${yR(r)+4}" font-size="11.5" font-weight="600" style="fill:var(${DOP[M].col})">${M}</text>
+   ${XS.map((x,i)=>`<rect x="${122+i*34}" y="${yR(r)-11}" width="28" height="22" rx="3" fill="var(--soft)" stroke="var(--rule)"/>`).join('')}`).join('')}
+  </svg>`;
+  document.getElementById('g-body').innerHTML=`
+  <div class="g-block"><span class="eyebrow">One box, four signs</span>
+   <div class="anat"><figure>${sampleCell(d)}<figcaption>Ga–Rb–Ta, x = ${d.x.toFixed(2)}</figcaption></figure>
+   <ol class="marks">
+    <li><span class="mk">1</span><span><b>The frame.</b> Bold: one of the key set K12, the ${k12.length} compositions re-made fresh at home (ICP, TGA–MS) before beam time. Only these get D2B. A thin frame: not in the key set.</span></li>
+    <li><span class="mk">2</span><span><b>The number.</b> How many of the five probes are planned for this garnet: ${ps.size} here. The other buttons above the matrix put a thesis value in its place.</span></li>
+    <li><span class="mk">3</span><span><b>The shade.</b> The same number as a colour, pale for 2 and dark for 5, so the busy garnets stand out from afar. It says nothing the number does not.</span></li>
+    <li><span class="mk">4</span><span><b>The five squares.</b> One per probe, always in this order; filled is planned, empty is not. Here ${on.join(', ')}${off.length?'; no '+off.join(', '):''}.<span class="sqs">${sqLine}</span></span></li>
+   </ol></div></div>
+  <div class="g-grid">
+   <div class="g-block"><span class="eyebrow">Where each garnet sits</span>${tree}
+    <p>Each panel is one family, named by what replaces part of the Zr: Ta in Chapter III, Sc in Chapter IV. Its reference (x = 0, the large box on the left) branches into three rows, one for each ion put on the La site, Rb<sup>+</sup>, Ba<sup>2+</sup> and Y<sup>3+</sup>; each row runs over six amounts x. Two references and 2 × 3 × 6 substituted garnets: ${DATA.length}.</p></div>
+   <div class="g-block"><span class="eyebrow">The formula over each panel</span>
+    <p>In Li<sub>6.3+(3−n)x</sub>…La<sub>3−x</sub>M<sub>x</sub>…, n is the charge of M: 1 for Rb, 2 for Ba, 3 for Y. Putting M<sup>n+</sup> where La<sup>3+</sup> was leaves (3 − n)x of charge for lithium to supply: Rb adds 2x Li, Ba adds x, Y none.</p>
+    <p>The Sc family starts at 6.5 Li, not 6.3: Ta<sup>5+</sup> on a Zr<sup>4+</sup> site removes 0.1 Li, Sc<sup>3+</sup> adds 0.1. Nominal vacancies are 7 − Li: 0.7 for the Ga–Ta reference, 0.5 for Ga–Sc, fewer along the Ba and Rb rows, almost none (or below zero) at the Li-rich end of Rb.</p></div>
+  </div>
+  <div class="g-block"><span class="eyebrow">Why most boxes say 2</span>
+   <p>Every garnet gets the same two measurements; a box that says 2 has nothing more. Anything above 2 was chosen for a question it carries.</p>
+   <ul class="gp">${GPROBE.map(([p,pr,w])=>{const L=has(p),all=L.length===DATA.length;const ex=extra[p]&&extra[p].length?`<span>${p==='D20'?'heating ramps to 1000 K':'resonant diffraction at the Y K edge'} for ${extra[p].length}: ${extra[p].map(e=>e.fam==='Ta'?'Ga–M–Ta '+(e.M?e.M+' '+e.x.toFixed(2):'ref.'):'Ga–M–Sc '+(e.M?e.M+' '+e.x.toFixed(2):'ref.')).join(' · ')}</span>`:'';
+     return `<li><span class="ptag" style="background:${PTAG[p][1]}">${p} <small>${pr}</small></span><span>${w}</span><span class="who"><span class="n">${all?'all '+L.length:L.length+' of '+DATA.length}${p==='D2B'?' · the key set':''}</span>${all?'':names(L)}${ex}</span></li>`;}).join('')}</ul></div>
+  <div class="g-grid">
+   <div class="g-block"><span class="eyebrow">The four buttons</span>
+    <ul class="gm">${Object.keys(GMODE).map(k=>`<li class="${k===mode?'now':''}"><b>${GMODE[k][0]}</b>${k===mode?'<span class="tag">now</span>':''}<br>${GMODE[k][1]}</li>`).join('')}</ul>
+    <p class="note">In every mode the squares still show the plan and the bold frame still marks K12. Sc boxes read n/a in the two phase modes: Chapter IV gives no phase fractions.</p></div>
+   <div class="g-block"><span class="eyebrow">Where to look first</span>
+    <p>Dark boxes with a bold frame are where the beam time goes: the two references, the best conductor of each family (Ga–Y<sub>0.20</sub>–Ta, Ga–Rb<sub>0.03</sub>–Sc) and the compositions that isolate one question each.</p>
+    <p>Then select any box: the panel under the matrix lists, for that garnet, what the thesis refined and what each planned measurement will determine.</p></div>
+  </div>`;
+}
+const GD=document.getElementById('guide');
+document.getElementById('howto-open').addEventListener('click',()=>{guide();if(GD.showModal)GD.showModal();else GD.setAttribute('open','');GD.scrollTop=0;});
+const closeGuide=()=>{if(GD.close)GD.close();else GD.removeAttribute('open');};
+document.getElementById('g-x').addEventListener('click',closeGuide);
+document.getElementById('g-close').addEventListener('click',closeGuide);
+GD.addEventListener('click',e=>{if(e.target===GD)closeGuide();});
+GD.addEventListener('close',()=>document.getElementById('howto-open').focus({preventScroll:true}));
 
 /* questions grid */
 const QP={G01:{D2B:2,ID22:1},G02:{home:1,D2B:2,D20:2},G03:{home:2,D2B:1},G04:{ID22:1,EXAFS:2},G05:{D2B:1,ID22:2},G06:{D2B:2,ID22:2,EXAFS:1},G07:{D2B:1,ID22:2,EXAFS:1},G08:{home:1,D2B:2,D20:1},G09:{home:1,D2B:1,ID22:2},G10:{D2B:2,D20:2},G11:{PDF:2}};
